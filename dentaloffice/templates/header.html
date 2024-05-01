@@ -1,0 +1,25 @@
+<html>
+  <header>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <style>
+      .footer {
+        font-size:10px;
+      }
+    </style>
+  </header>
+  <body>
+    <a href='/'>Home</a> | 
+    <a href='/aboutus'>About Us</a> |
+    <a href='/our_doctors'>Our Dentists</a> |
+    <a href="/appointments">Book an Appointment</a> | 
+    <a href='/dentist_sched'>Dentist Schedules</a> |
+        {% if session["user"] is defined %}
+        Welcome, {{ session["user"]["first_name"] }}.
+        <a href='/logout'>Logout</a>
+        {% else %}
+        <a href='/login'>Login</a>
+        {% endif %}
+
+        
+
+    <p/>

@@ -1,0 +1,49 @@
+{% include "header.html" %}
+
+<html>
+<head>
+    <style>
+        body {
+            background-color:#FFFFFF;
+            color:#1D1C1C;
+            font-family: 'Futura', sans-serif;
+        }
+        
+        .logo {
+            margin-top: 20px;
+        }
+        .logo img {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sparkle Dental Clinic</h1>
+        <div class="logo">
+        </div>
+    </header>
+
+    <h3>Our Services</h3>
+    <table class="table table-striped service-table">    
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Service</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for service in services %}
+            <tr>
+                <td>{{ service.code }}</td>
+                <td>{{ service.service }}</td>
+                <td>{{ service.price }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+
+{% include "footer.html" %}

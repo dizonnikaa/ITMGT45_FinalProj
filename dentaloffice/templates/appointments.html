@@ -1,0 +1,58 @@
+{% include "header.html" %}
+<style>
+    body {
+        background-color:#FFFFFF;
+        color:#1D1C1C;
+        font-family: 'Futura', sans-serif;
+    }
+    
+</style>
+<div class="container">
+    <h1>Available Appointments</h1>
+    <table class="table table-striped appointment-table">
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>Time</th>
+                <th>Room</th>
+                <th>Dentist</th>
+                <th>Patient</th>
+                <th>Availability</th>
+                <th>Edit My Reservation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+            <tr>
+                <td>{{ appointment.day }}</td>
+                <td>{{ appointment.time }}</td>
+                <td>{{ appointment.room }}</td>
+                <td>{{ appointment.dentist }}</td>
+                <td>{{ appointment.patient }}</td>
+                <td>
+                    {% if appointment.reserved %}
+                        <span style="color:red;">Unavailable</span>
+                    {% else %}
+                        <form action="/reserve" method="POST">
+                            <input type="hidden" name="day" value="{{ appointment.day }}">
+                            <input type="hidden" name="time" value="{{ appointment.time }}">
+                            <input type="hidden" name="room" value="{{ appointment.room }}">
+                            <input type="hidden" name="dentist" value="{{ appointment.dentist }}">
+                            <button type="submit" style="color:blue;">Reserve</button>
+                        </form>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if appointment.reserved and appointment.patient == session.user.username %}
+                        <form action="/cancel_reservation" method="POST">
+                            <input type="hidden" name="appointment_id" value="{{ appointment._id }}">
+                            <button type="submit" style="color:red;">Cancel</button>
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% include "footer.html" %}

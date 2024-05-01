@@ -1,0 +1,26 @@
+{% include "header.html" %}
+<style>
+    body {
+        background-color:#EEF5FF;
+        color:#1D1C1C;
+        font-family: 'Futura', sans-serif;
+    }
+</style>
+<h1>Login</h1>
+{% if error %}
+    <p style="color:red">{{ error }}</p>
+{% endif %}
+<form action="/login" method="POST">
+   <div>
+     Username
+   </div>
+   <input type="text" name="username"></input>
+   <div>
+     Password
+   </div>
+   <input type="password" name="password"></input>
+   <div>
+   <input type="submit" value="Login"/>
+   </div>
+</form>
+{% include "footer.html" %}

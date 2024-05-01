@@ -1,0 +1,40 @@
+{% include "header.html" %}
+<style>
+    body {
+        background-color:#FFFFFF;
+        color:#1D1C1C;
+        font-family: 'Futura', sans-serif;
+
+    }
+    .product-image  {
+        height: 80px;
+    }
+</style>
+<header>
+    <h5>Sparkle Dental Clinic</h5>
+</header>
+<div class="container">
+    <h1>Our Dentists</h1>
+    <table class="table table-striped dentists-table">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Specialty</th>
+                    <th>Email Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for doctor in doctors %}
+            <tr>
+                <td>{{ doctor.first_name }}</td>
+                <td>{{ doctor.last_name }}</td>
+                <td>{{ doctor.specialty }}</td>
+                <td>{{ doctor.email_address }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+{% include "footer.html" %}

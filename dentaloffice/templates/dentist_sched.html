@@ -1,0 +1,62 @@
+{% include "header.html" %}
+<style>
+    body {
+        background-color:#FFFFFF;
+        color:#1D1C1C;
+        font-family: 'Futura', sans-serif;
+    }
+    .product-image  {
+        height: 80px;
+    }
+</style>
+<header>
+    <h5>Sparkle Dental Clinic</h5>
+</header>
+<form action="/dentist_sched" method="GET">
+    <label for="dentist">Select Dentist:</label>
+    <select name="dentist" id="dentist">
+        <option value="">All Dentists</option>
+        {% for dentist in dentists %}
+            <option value="{{ dentist }}" {% if dentist == selected_dentist %} selected {% endif %}>{{ dentist }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Filter</button>
+</form>
+
+<div class="container">
+    <h1>Confirmed Dentist Schedules</h1>
+    <table class="table table-striped appointment-table">
+        <thead>
+            <tr>
+                <th>Dentist</th>
+                <th>Day</th>
+                <th>Time</th>
+                <th>Room</th>
+                <th>Patient's Email Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+            <tr>
+                <td>{{ appointment.dentist }}</td>
+                <td>{{ appointment.day }}</td>
+                <td>{{ appointment.time }}</td>
+                <td>{{ appointment.room }}</td>
+                <td>{{ appointment.patient }}</td>
+                <td>
+                    {% if not appointment.reserved %}
+                        <form action="/reserve" method="POST">
+                            <input type="hidden" name="day" value="{{ appointment.day }}">
+                            <input type="hidden" name="time" value="{{ appointment.time }}">
+                            <input type="hidden" name="room" value="{{ appointment.room }}">
+                            <input type="hidden" name="dentist" value="{{ appointment.dentist }}">
+                            <button type="submit" style="color:blue;">Reserve</button>
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% include "footer.html" %}
